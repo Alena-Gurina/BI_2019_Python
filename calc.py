@@ -1,3 +1,4 @@
+
 def calc() -> object:
     while 0 == 0:
         print('If you would like to exit press N')  # Would you like to continue?
