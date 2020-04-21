@@ -1,4 +1,4 @@
-def bed_merge(file1, output_file, max_gap_del_size=0):
+def bed_merge_fun(file1, output_file, max_gap_del_size=0):
     with open(file1, 'r') as input:
         line_a = list(input.readline().rstrip().split('\t'))
         while line_a[0].startswith('#') or line_a[0].startswith('track'):
@@ -57,4 +57,4 @@ if __name__ == '__main__':
     output_file1 = 'merging_test_no_gap.bed'
     output_file2 = 'merging_test_gap2.bed'
     # bed_merge(file1, output_file1)
-    bed_merge(file1, output_file2, 3)
+    bed_merge_fun(file1, output_file2, 3)

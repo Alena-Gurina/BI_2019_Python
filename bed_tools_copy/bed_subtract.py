@@ -1,5 +1,5 @@
 #!!! warnings! work only with sorted files
-def subtract(file1, file2, output_file):
+def subtract_fun(file1, file2, output_file):
     with open(file1, 'r') as input1:
         with open(file2, 'r') as input2:
             for line in input1:
@@ -10,7 +10,6 @@ def subtract(file1, file2, output_file):
                 else:
                     line = list(line.rstrip().split('\t'))
                     for file2_line in input2:
-                        print(line, file2_line)
                         file2_line = list(file2_line.rstrip().split('\t'))
                         if line[0] != file2_line[0]:
                             pass
@@ -56,4 +55,4 @@ if __name__ == '__main__':
     file1 = "file1.bed"
     file2 = "file2.bed"
     output = "minus_test.bed"
-    subtract(file1, file2, output)
+    subtract_fun(file1, file2, output)

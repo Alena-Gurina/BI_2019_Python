@@ -1,4 +1,4 @@
-def intersect(file_a, file_b, output_file, variant='only_overlapped'):
+def intersect_fun(file_a, file_b, output_file, variant='only_overlapped'):
     valid_var = {'only_overlapped', 'not_intersected', 'whole_interval'}
     if variant not in valid_var:
         raise ValueError('variant value could be only only_overlapped, not_intersected, or whole_interval')
@@ -72,4 +72,4 @@ if __name__ == '__main__':
     file_a = '../BI_2019_Python/bed_copy/bed_1.bed'
     file_b = '../BI_2019_Python/bed_copy/bed_2.bed'
     output = 'intersect1.bed'
-    intersect(file_a, file_b, output, variant='not_intersected')
+    intersect_fun(file_a, file_b, output, variant='not_intersected')

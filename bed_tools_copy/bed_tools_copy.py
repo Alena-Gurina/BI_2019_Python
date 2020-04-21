@@ -1,6 +1,7 @@
 import argparse
 import os
-from bed_copy import bed_sorting
+from bed_sorting import bed_sorting_fun
+from bed_merge import bed_merge_fun
 
 parser = argparse.ArgumentParser(description="bed_tools_copy")
 parser.add_argument('--sort', help='sorted bed file', action='store_true', default=False)
@@ -30,27 +31,26 @@ if (args.subtract or args.intersect) and args.file2 == 'None':
 
 if args.sort:
 
-    bed_sorting.bed_sorting(args.file, args.out_f)
+    bed_sorting_fun(args.file, args.out_f)
 else:
-    bed_sorting.bed_sorting(args.file, 'tmp_sort')
-from bed_copy import bed_merge
+    bed_sorting_fun(args.file, 'tmp_sort')
 
 if args.merge:
-    bed_merge.bed_merge('tmp_sort', args.out_f, args.gap_size)
+    bed_merge_fun('tmp_sort', args.out_f, args.gap_size)
     os.remove('tmp_sort')
 
 if args.subtract or args.intersect:
-    bed_sorting.bed_sorting(args.file2, 'tmp_file2_sorted')
-    bed_merge.bed_merge('tmp_sort', 'tmp_merged')
-    bed_merge.bed_merge('tmp_file2_sorted', 'tmp_file2_merged')
+    bed_sorting_fun(args.file2, 'tmp_file2_sorted')
+    bed_merge_fun('tmp_sort', 'tmp_merged')
+    bed_merge_fun('tmp_file2_sorted', 'tmp_file2_merged')
     if args.subtract:
-        from bed_copy import bed_subtract
+        from bed_subtract import subtract_fun
 
-        bed_subtract.subtract('tmp_merged', 'tmp_file2_merged', args.out_f)
+        subtract_fun('tmp_merged', 'tmp_file2_merged', args.out_f)
     if args.intersect:
-        from bed_copy import bed_intersect
+        from bed_intersect import intersect_fun
 
-        bed_intersect.intersect('tmp_merged', 'tmp_file2_merged', args.out_f, args.intersect_type)
+        intersect_fun('tmp_merged', 'tmp_file2_merged', args.out_f, args.intersect_type)
     os.remove('tmp_sort')
     os.remove('tmp_merged')
     os.remove('tmp_file2_sorted')

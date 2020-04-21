@@ -1,4 +1,4 @@
-def bed_sorting(file, output_file, save_header=False):
+def bed_sorting_fun(file, output_file, save_header=False):
     chromosome_set = set()
     with open(file, 'r') as input:
         for line in input:
@@ -23,7 +23,8 @@ def bed_sorting(file, output_file, save_header=False):
                     if line.lstrip()[:line.find('\t')] == chromosome:
                         # read and save all intervals from one chromosome
                         bed_part.append(line.rstrip().split('\t'))
-        bed_part.sort(key=lambda i: (i[1], i[2]))
+        if len(bed_part) > 1:
+            bed_part.sort(key=lambda i: (int(i[1]), int(i[2])))
         # sort intervals using first start and then finish of interval
 
         with open(output_file, 'a') as output:
@@ -37,4 +38,4 @@ def bed_sorting(file, output_file, save_header=False):
 if __name__ == '__main__':
     file = "../BI_2019_Python/bed_copy/lamina.bed"
     output_file = "../BI_2019_Python/bed_copy/tmp_output.bed"
-    bed_sorting(file, output_file)
+    bed_sorting_fun('bed_1.bed', 'test_s')
